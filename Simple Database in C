@@ -1,54 +1,60 @@
-//A Database (simple)
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
+#include <string.h>
+
 #define MAX_RECORDS 100
-struct record{
+
+struct Record {
     int id;
     char name[50];
     int age;
 };
-struct record database[MAX_RECORDS];
+
+struct Record database[MAX_RECORDS];
 int record_count = 0;
-void addrecord(int id; char name[];int age){
-    if(record_count < MAX_RECORDS){
+
+void addRecord(int id, char name[], int age) {
+    if (record_count < MAX_RECORDS) {
         database[record_count].id = id;
         strcpy(database[record_count].name, name);
         database[record_count].age = age;
         record_count++;
-        printf("Record Added Successfully!\n");
+        printf("Record added successfully!\n");
     } else {
-        printf("Database is Full, Can't add more records.\n");
+        printf("Database is full, cannot add more records.\n");
     }
 }
-void displayrecords(){
-    if (record_count == 0){
+
+void displayRecords() {
+    if (record_count == 0) {
         printf("No records to display.\n");
     } else {
         printf("ID\tName\t\tAge\n");
-        printf("-------------------------\n");
-        for(int i = 0; i < record_count; i++){
+        printf("----------------------------\n");
+        for (int i = 0; i < record_count; i++) {
             printf("%d\t%s\t\t%d\n", database[i].id, database[i].name, database[i].age);
         }
     }
 }
-void searchrecord(int id){
+
+void searchRecord(int id) {
     int found = 0;
-    for (int i; i < record_count; i++){
-        if (database[i].id == id){
-            printf("Record Found: ID: %d, Name: %s, Age: %d\n", database[i].id, database[i].name, database[i].age);
+    for (int i = 0; i < record_count; i++) {
+        if (database[i].id == id) {
+            printf("Record found: ID: %d, Name: %s, Age: %d\n", database[i].id, database[i].name, database[i].age);
             found = 1;
             break;
         }
     }
-    if (!found){
-        printf("Record with ID %d not found/n", id);
+    if (!found) {
+        printf("Record with ID %d not found.\n", id);
     }
 }
-void deleterecord(int id){
+
+void deleteRecord(int id) {
     int found = 0;
-    for(int i = 0; i < record_count; i++){
-        if (database[i].id == id){
-            for(int j = i; j < record_count - 1; j++){
+    for (int i = 0; i < record_count; i++) {
+        if (database[i].id == id) {
+            for (int j = i; j < record_count - 1; j++) {
                 database[j] = database[j + 1];
             }
             record_count--;
@@ -57,15 +63,17 @@ void deleterecord(int id){
             break;
         }
     }
-    if(!found){
+    if (!found) {
         printf("Record with ID %d not found.\n", id);
     }
 }
-int main(){
+
+int main() {
     int choice, id, age;
     char name[50];
-    while (1){
-        printf("\nS I M P L E  D A T A B A S E\n");
+
+    while (1) {
+        printf("\nSimple Database\n");
         printf("1. Add Record\n");
         printf("2. Display Records\n");
         printf("3. Search Record\n");
@@ -73,7 +81,8 @@ int main(){
         printf("5. Exit\n");
         printf("Choose an option: ");
         scanf("%d", &choice);
-          switch (choice) {
+
+        switch (choice) {
             case 1:
                 printf("Enter ID: ");
                 scanf("%d", &id);
@@ -97,6 +106,7 @@ int main(){
                 deleteRecord(id);
                 break;
             case 5:
+                printf("Exiting program. Goodbye!\n");
                 return 0;
             default:
                 printf("Invalid choice. Try again.\n");
